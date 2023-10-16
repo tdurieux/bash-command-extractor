@@ -1,0 +1,32 @@
+{
+  "name": "@tdurieux/bash-command-extractor",
+  "version": "0.0.1",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:tdurieux/bash-command-extractor.git"
+  },
+  "main": "./build/index.js",
+  "scripts": {
+    "build": "rm -rf ./build; tsc;"
+  },
+  "author": "Thomas Durieux",
+  "license": "MIT",
+  "files": [
+    "./build"
+  ],
+  "bin": {
+    "bash-command-extractor": "./build/index.js"
+  },
+  "dependencies": {
+    "@tdurieux/dinghy": "^0.5.5",
+    "@tdurieux/docker-parfum": "^0.6.2",
+    "commander": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.8",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.5"
+  }
+}
