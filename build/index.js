@@ -49,7 +49,14 @@ program
         var root, r, output;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4, (0, dinghy_1.parseShell)(bash)];
+                case 0:
+                    bash = bash
+                        .replace(/\\n/gm, "\n")
+                        .replace(/\r\n/gm, "\n")
+                        .replace(/#([^\\\n]*)$/gm, "#$1\\")
+                        .replace(/\\([ \t]+)\n/gm, "$1\\\n")
+                        .replace(/^([ \t]*)\n/gm, "$1\\\n");
+                    return [4, (0, dinghy_1.parseShell)(bash)];
                 case 1:
                     root = _a.sent();
                     r = docker_parfum_1.enricher.enrich(root);
