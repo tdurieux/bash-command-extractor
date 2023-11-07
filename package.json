@@ -1,7 +1,12 @@
 {
   "name": "@tdurieux/bash-command-extractor",
   "version": "0.1.1",
-  "description": "",
+  "description": "Extract the bash commands",
+  "keywords": [
+    "bash",
+    "command",
+    "extractor"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:tdurieux/bash-command-extractor.git"
@@ -19,8 +24,8 @@
     "bash-command-extractor": "./build/index.js"
   },
   "dependencies": {
-    "@tdurieux/dinghy": "^0.5.7",
-    "@tdurieux/docker-parfum": "^0.7.2",
+    "@tdurieux/dinghy": "^0.5.8",
+    "@tdurieux/docker-parfum": "^0.7.3",
     "commander": "^11.1.0"
   },
   "devDependencies": {
