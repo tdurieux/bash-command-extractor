@@ -40,13 +40,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var commander_1 = require("commander");
 var dinghy_1 = require("@tdurieux/dinghy");
 var docker_parfum_1 = require("@tdurieux/docker-parfum");
+var docker_type_1 = require("@tdurieux/dinghy/build/docker-type");
 var program = new commander_1.Command();
 program
     .description("Parse bash command and print the list of used command")
     .argument("<bash>", "command to parse")
     .action(function (bash) {
     return __awaiter(this, void 0, void 0, function () {
-        var parser, root, output;
+        var p, parser, root, output;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -56,8 +57,10 @@ program
                         .replace(/#([^\\\n]*)$/gm, "#$1\\")
                         .replace(/\\([ \t]+)\n/gm, "$1\\\n")
                         .replace(/^([ \t]*)\n/gm, "$1\\\n");
-                    parser = new dinghy_1.ShellParser(bash);
-                    return [4, parser.parse()];
+                    p = new docker_type_1.Position(0, 0);
+                    p.file = new dinghy_1.File(undefined, bash);
+                    parser = new dinghy_1.ShellParser(bash, p);
+                    return [4, parser.parse(0)];
                 case 1:
                     root = _a.sent();
                     if (root) {

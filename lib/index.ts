@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { ShellParser, nodeType, parseShell } from "@tdurieux/dinghy";
+import { File, ShellParser, nodeType } from "@tdurieux/dinghy";
 import { enricher } from "@tdurieux/docker-parfum";
+import { Position } from "@tdurieux/dinghy/build/docker-type";
 
 const program = new Command();
 
@@ -18,8 +19,10 @@ program
       .replace(/\\([ \t]+)\n/gm, "$1\\\n")
       // empty line
       .replace(/^([ \t]*)\n/gm, "$1\\\n");
-    const parser = new ShellParser(bash);
-    const root = await parser.parse();
+    const p = new Position(0, 0);
+    p.file = new File(undefined, bash);
+    const parser = new ShellParser(bash, p);
+    const root = await parser.parse(0);
     if (root) {
       enricher.enrich(root);
       const output = root
