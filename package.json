@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@tdurieux/dinghy": "^0.5.5",
-    "@tdurieux/docker-parfum": "^0.6.2",
+    "@tdurieux/docker-parfum": "^0.7.0",
     "commander": "^11.1.0"
   },
   "devDependencies": {
