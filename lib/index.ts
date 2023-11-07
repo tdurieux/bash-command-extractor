@@ -20,22 +20,27 @@ program
       .replace(/^([ \t]*)\n/gm, "$1\\\n");
     const parser = new ShellParser(bash);
     const root = await parser.parse();
-    const r = enricher.enrich(root);
-    const output = r.getElements(nodeType.BashCommand).filter(c => c.command).map((c) => {
-      return {
-        annotations: c.annotations,
-        command: c.command?.toString(),
-        categories: (c as any).categories || [],
-        args: c.args.map((a) => ({
-          annotations: a.annotations,
-          content: a.toString(),
-        })),
-      };
-    });
+    if (root) {
+      enricher.enrich(root);
+      const output = root
+        .getElements(nodeType.BashCommand)
+        .filter((c) => c.command)
+        .map((c) => {
+          return {
+            annotations: c.annotations,
+            command: c.command?.toString(),
+            categories: (c as any).categories || [],
+            args: c.args.map((a) => ({
+              annotations: a.annotations,
+              content: a.toString(),
+            })),
+          };
+        });
+      console.log(JSON.stringify(output, null, 2));
+    }
     if (parser.errors.length > 0) {
       return console.log(JSON.stringify({ errors: parser.errors }, null, 2));
     }
-    console.log(JSON.stringify(output, null, 2));
   });
 
 program.parse();

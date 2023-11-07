@@ -46,7 +46,7 @@ program
     .argument("<bash>", "command to parse")
     .action(function (bash) {
     return __awaiter(this, void 0, void 0, function () {
-        var parser, root, r, output;
+        var parser, root, output;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -60,23 +60,28 @@ program
                     return [4, parser.parse()];
                 case 1:
                     root = _a.sent();
-                    r = docker_parfum_1.enricher.enrich(root);
-                    output = r.getElements(dinghy_1.nodeType.BashCommand).filter(function (c) { return c.command; }).map(function (c) {
-                        var _a;
-                        return {
-                            annotations: c.annotations,
-                            command: (_a = c.command) === null || _a === void 0 ? void 0 : _a.toString(),
-                            categories: c.categories || [],
-                            args: c.args.map(function (a) { return ({
-                                annotations: a.annotations,
-                                content: a.toString(),
-                            }); }),
-                        };
-                    });
+                    if (root) {
+                        docker_parfum_1.enricher.enrich(root);
+                        output = root
+                            .getElements(dinghy_1.nodeType.BashCommand)
+                            .filter(function (c) { return c.command; })
+                            .map(function (c) {
+                            var _a;
+                            return {
+                                annotations: c.annotations,
+                                command: (_a = c.command) === null || _a === void 0 ? void 0 : _a.toString(),
+                                categories: c.categories || [],
+                                args: c.args.map(function (a) { return ({
+                                    annotations: a.annotations,
+                                    content: a.toString(),
+                                }); }),
+                            };
+                        });
+                        console.log(JSON.stringify(output, null, 2));
+                    }
                     if (parser.errors.length > 0) {
                         return [2, console.log(JSON.stringify({ errors: parser.errors }, null, 2))];
                     }
-                    console.log(JSON.stringify(output, null, 2));
                     return [2];
             }
         });

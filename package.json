@@ -19,8 +19,8 @@
     "bash-command-extractor": "./build/index.js"
   },
   "dependencies": {
-    "@tdurieux/dinghy": "^0.5.5",
-    "@tdurieux/docker-parfum": "^0.7.0",
+    "@tdurieux/dinghy": "^0.5.7",
+    "@tdurieux/docker-parfum": "^0.7.2",
     "commander": "^11.1.0"
   },
   "devDependencies": {
