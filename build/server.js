@@ -14,7 +14,7 @@ function startServer(options) {
     app.use(express_1.default.urlencoded({ extended: true }));
     app.use((0, compression_1.default)({ level: 6 }));
     app.post("/", function (req, res) {
-        var body = req.headers["content-type"] == "applications/json"
+        var body = req.headers["content-type"] == "application/json"
             ? JSON.parse(req.body)
             : req.body;
         if (body) {
@@ -26,7 +26,7 @@ function startServer(options) {
                 return res.json((0, parser_1.parseShell)(body, { smell: options.smell }));
             }
         }
-        return res.status(403).json({ error: "invalid request" });
+        return res.status(400).json({ error: "invalid request" });
     });
     app.listen(options.port, function () {
         console.log("Example app listening on port ".concat(options.port, "!"));
