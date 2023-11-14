@@ -1,6 +1,6 @@
 {
   "name": "@tdurieux/bash-command-extractor",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Extract the bash commands",
   "keywords": [
     "bash",
