@@ -12,7 +12,7 @@ export function startServer(
 
   app.post("/", function (req, res) {
     const body =
-      req.headers["content-type"] == "applications/json"
+      req.headers["content-type"] == "application/json"
         ? JSON.parse(req.body)
         : req.body;
 
@@ -24,7 +24,7 @@ export function startServer(
         return res.json(parseShell(body, { smell: options.smell }));
       }
     }
-    return res.status(403).json({ error: "invalid request" });
+    return res.status(400).json({ error: "invalid request" });
   });
   app.listen(options.port, function () {
     console.log(`Example app listening on port ${options.port}!`);
