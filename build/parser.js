@@ -5,12 +5,7 @@ var dinghy_1 = require("@tdurieux/dinghy");
 var docker_parfum_1 = require("@tdurieux/docker-parfum");
 var docker_type_1 = require("@tdurieux/dinghy/build/docker-type");
 function parseShell(shell, options) {
-    shell = shell
-        .replace(/\\n/gm, "\n")
-        .replace(/\r\n/gm, "\n")
-        .replace(/#([^\\\n]*)$/gm, "#$1\\")
-        .replace(/\\([ \t]+)\n/gm, "$1\\\n")
-        .replace(/^([ \t]*)\n/gm, "$1\\\n");
+    shell = shell.replace(/\\n/gm, "\n").replace(/\r\n/gm, "\n");
     var p = new docker_type_1.Position(0, 0);
     p.file = new dinghy_1.File(undefined, shell);
     var parser = new dinghy_1.ShellParser(shell, p);

@@ -28,6 +28,9 @@ function startServer(options) {
         }
         return res.status(400).json({ error: "invalid request" });
     });
+    app.get("/healthz", function (req, res) {
+        res.status(200).send("OK");
+    });
     app.listen(options.port, function () {
         console.log("Example app listening on port ".concat(options.port, "!"));
     });
