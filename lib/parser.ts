@@ -10,14 +10,7 @@ export function parseShell(
   commands?: any[];
   smells?: any[];
 } {
-  shell = shell
-    .replace(/\\n/gm, "\n")
-    .replace(/\r\n/gm, "\n")
-    .replace(/#([^\\\n]*)$/gm, "#$1\\")
-    // empty space after \
-    .replace(/\\([ \t]+)\n/gm, "$1\\\n")
-    // empty line
-    .replace(/^([ \t]*)\n/gm, "$1\\\n");
+  shell = shell.replace(/\\n/gm, "\n").replace(/\r\n/gm, "\n");
   const p = new Position(0, 0);
   p.file = new File(undefined, shell);
   const parser = new ShellParser(shell, p);
