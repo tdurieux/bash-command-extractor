@@ -1,6 +1,12 @@
-import { File, ShellParser, nodeType } from "@tdurieux/dinghy";
-import { Matcher, enricher } from "@tdurieux/docker-parfum";
-import { Position } from "@tdurieux/dinghy/build/docker-type";
+import {
+  BashCommand,
+  enricher,
+  File,
+  Position,
+  ShellNodeTypes,
+  ShellParser,
+} from "@tdurieux/dinghy";
+import { Matcher } from "@tdurieux/docker-parfum";
 
 export function parseShell(
   shell: string,
@@ -14,7 +20,7 @@ export function parseShell(
   const p = new Position(0, 0);
   p.file = new File(undefined, shell);
   const parser = new ShellParser(shell, p);
-  let ast: nodeType.DockerOpsNodeType = undefined;
+  let ast: ShellNodeTypes = undefined;
   let errors = null;
   try {
     ast = parser.parse();
@@ -31,9 +37,9 @@ export function parseShell(
   }
   enricher.enrich(ast);
   const commands = ast
-    .getElements(nodeType.BashCommand)
-    .filter((c: nodeType.BashCommand) => c.command)
-    .map((c: nodeType.BashCommand) => {
+    .getElements(BashCommand)
+    .filter((c: BashCommand) => c.command)
+    .map((c: BashCommand) => {
       return {
         annotations: c.annotations,
         command: c.command?.toString(),

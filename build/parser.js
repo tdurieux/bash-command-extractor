@@ -3,10 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.parseShell = void 0;
 var dinghy_1 = require("@tdurieux/dinghy");
 var docker_parfum_1 = require("@tdurieux/docker-parfum");
-var docker_type_1 = require("@tdurieux/dinghy/build/docker-type");
 function parseShell(shell, options) {
     shell = shell.replace(/\\n/gm, "\n").replace(/\r\n/gm, "\n");
-    var p = new docker_type_1.Position(0, 0);
+    var p = new dinghy_1.Position(0, 0);
     p.file = new dinghy_1.File(undefined, shell);
     var parser = new dinghy_1.ShellParser(shell, p);
     var ast = undefined;
@@ -25,9 +24,9 @@ function parseShell(shell, options) {
     if (!ast) {
         return { errors: errors || [] };
     }
-    docker_parfum_1.enricher.enrich(ast);
+    dinghy_1.enricher.enrich(ast);
     var commands = ast
-        .getElements(dinghy_1.nodeType.BashCommand)
+        .getElements(dinghy_1.BashCommand)
         .filter(function (c) { return c.command; })
         .map(function (c) {
         var _a;
